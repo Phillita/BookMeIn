@@ -19,11 +19,17 @@
 // verify the plugin using a signed up users generated key (or trial)
 
 
-// (function ( $ ) {
-  // private variables
+(function ( $ ) {
+  // Awesome calendar to use!
+  // http://fullcalendar.io/
 
+  // how to add a script dynamically
+  // var script = document.createElement('script');
+  // script.src = 'url-to-plugin';
+  // script.type = 'text/javascript';
+  // document.getElementsByTagName('head')[0].appendChild(script);
 
-  // $.fn.bookMe = function( options ) {
+  $.fn.bookMe = function( options ) {
     // do stuff here
     // var defaults = {
     //   textColor: "#000",
@@ -38,8 +44,9 @@
     // };
     // var settings = $.extend( true, {}, defaults, options );
 
-    // return this.each(function() {
-        // Do something to each element here.
-    // });
-//   }
-// }( jQuery ));
+    return this.each(function() {
+      // Do something to each element here.
+
+    });
+  }
+}( jQuery ));
