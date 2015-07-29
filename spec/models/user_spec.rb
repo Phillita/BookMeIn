@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let!(:user) { FactoryGirl.build(:user) }
+  let!(:user) { FactoryGirl.create(:user) }
 
   describe 'validations' do
     it 'should be valid' do
