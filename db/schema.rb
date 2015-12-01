@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201010816) do
+ActiveRecord::Schema.define(version: 20151201013929) do
+
+  create_table "calendars", force: :cascade do |t|
+    t.string   "name",               limit: 255
+    t.integer  "company_id",         limit: 4
+    t.boolean  "event_verification"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",       limit: 255
