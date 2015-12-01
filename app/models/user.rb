@@ -5,7 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable, :confirmable
 
-  before_save { self.email = email.downcase }
+  before_save :downcase_email, if: :email_changed?
+  before_create :create_company, unless: :company_id
+
+  belongs_to :company
 
   validates :first_name, :last_name, presence: true, length: { maximum: 50 }
 
@@ -18,5 +21,15 @@ class User < ActiveRecord::Base
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  private
+
+  def downcase_email
+    self.email = email.downcase
+  end
+
+  def create_company
+    self.company_id = Company.create.id
   end
 end

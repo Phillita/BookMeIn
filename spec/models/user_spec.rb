@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let!(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.build(:user) }
 
   describe 'validations' do
     it 'should be valid' do
@@ -91,6 +91,14 @@ RSpec.describe User, type: :model do
   describe 'name' do
     it 'shoud return the name of the user' do
       expect(user.name).to eq("#{user.first_name} #{user.last_name}")
+    end
+  end
+
+  describe 'company' do
+    context 'after_create' do
+      it 'should create a new company' do
+        expect(FactoryGirl.create(:user, company_id: nil).company.present?).to be_truthy
+      end
     end
   end
 end
