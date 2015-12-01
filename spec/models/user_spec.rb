@@ -47,4 +47,15 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'guest?' do
+    it 'should return true if the user has not been saved' do
+      expect(user.guest?).to be_truthy
+    end
+
+    it 'should return false if the user has been saved' do
+      user.save
+      expect(user.guest?).to be_falsey
+    end
+  end
 end

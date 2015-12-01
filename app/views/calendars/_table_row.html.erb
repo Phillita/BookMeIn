@@ -1,0 +1,13 @@
+<tr>
+  <td>
+    <%= calendar.name %>
+  </td>
+  <td>
+    number of events
+  </td>
+  <td>
+    <%= link_to 'View', company_calendar_path(current_company, calendar), class: 'btn btn-primary' %>
+    <%= link_to 'Settings', edit_company_calendar_path(current_company, calendar), class: 'btn btn-primary' %>
+    <%= link_to 'Delete', company_calendar_path(current_company, calendar), class: 'btn btn-danger', method: :delete %>
+  </td>
+</tr>

@@ -42,6 +42,7 @@ gem 'simple_form'
 
 group :development do
   gem 'letter_opener'
+  gem 'better_errors'
 end
 
 group :development, :test do

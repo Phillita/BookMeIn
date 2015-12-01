@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def guest?
+    id.blank?
+  end
+
   private
 
   def downcase_email
