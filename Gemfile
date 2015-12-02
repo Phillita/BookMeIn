@@ -39,6 +39,7 @@ gem 'devise'
 
 gem 'cancancan', '~> 1.10'
 gem 'simple_form'
+gem 'bower-rails', '~> 0.10.0'
 
 group :development do
   gem 'letter_opener'
