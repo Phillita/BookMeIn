@@ -5,10 +5,10 @@ setupCalendar = function() {
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			defaultDate: '2015-12-12',
-			editable: false,
+			// defaultDate: '2015-12-12',
+			editable: true,
 			eventLimit: true, // allow "more" link when too many events
-      eventLimit: true, // for all non-agenda views
+      eventOverlap: false,
       views: {
           agenda: {
               eventLimit: 6 // adjust to 6 only for agendaWeek/agendaDay
@@ -25,7 +25,9 @@ setupCalendar = function() {
 			events: [
 				{
 					title: 'All Day Event',
-					start: moment().format('YYYY-MM-DD')
+					start: moment().format('YYYY-MM-DD'),
+          source: {}, // This is where the object from the db can go
+          description: 'CUSTOM' // Not standard, will not be displayed by default
 				},
 				{
 					title: 'Long Event',
@@ -77,12 +79,17 @@ setupCalendar = function() {
 					url: 'http://google.com/',
 					start: '2015-12-28'
 				}
-			]
+			],
+      eventRender: function(event, element) {
+        if(event.description) {
+          element.append('<p>' + event.description + '</p>');
+        }
+      }
 		});
 }
 
-$(document).on('ready', function(event) {
-});
+// $(document).on('ready', function(event) {
+// });
 
 $(document).on('ready page:load', function(event) {
   setupCalendar();
