@@ -3,6 +3,7 @@ class Calendar < ActiveRecord::Base
   has_one :api_key, dependent: :destroy
   has_many :calendar_workdays
   has_many :workdays, through: :calendar_workdays
+  has_many :events
 
   serialize :days_of_week
 
