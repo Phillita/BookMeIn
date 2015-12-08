@@ -14,7 +14,7 @@
     </div>
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-12">
-        <%= f.association :calendar_workdays, collection: Workday.all, label_method: :name, label: 'Days of Operation', as: :check_boxes %>
+        <%= f.association :workdays, collection: Workday.all, label_method: :name, label: 'Days of Operation', as: :check_boxes %>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-12">
         <%= f.input :business_hours_start, as: :time, label: 'Open Time' %>
@@ -30,6 +30,9 @@
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12">
         <%= f.input :editable, label: 'User Editable (Allows draggable events)', as: :boolean %>
+        <%= f.input :validate_name, label: 'Validate Presence of the Client\'s Name on the appointment', as: :boolean %>
+        <%= f.input :validate_phone, label: 'Validate Presence of the Client\'s Phone Number on the appointment', as: :boolean %>
+        <%= f.input :validate_comment, label: 'Validate Presence of a Client\'s Comment or Description on an appointment', as: :boolean %>
       </div>
     </div>
     <%= f.submit class: 'btn btn-success' %>

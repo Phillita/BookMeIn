@@ -36,7 +36,7 @@ class CalendarsController < ApplicationController
   end
 
   def update
-    @calendar.add_and_remove_days(params[:calendar][:calendar_workday_ids])
+    @calendar.add_and_remove_days(params[:calendar][:workday_ids])
 
     respond_to do |format|
       if @calendar.update_attributes(calendar_params)
