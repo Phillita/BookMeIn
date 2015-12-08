@@ -16,12 +16,13 @@ class CalendarsController < ApplicationController
   end
 
   def create
+    @calendar.add_and_remove_days(params[:calendar][:calendar_workday_ids])
     respond_to do |format|
-      if @calendar.save
-        format.html { render :show }
+      if @calendar.update_attributes(calendar_params)
+        format.html { redirect_to [current_company, @calendar] }
         format.js
       else
-        format.html { render :new }
+        format.html { render :edit }
         format.js
       end
     end
@@ -35,10 +36,11 @@ class CalendarsController < ApplicationController
   end
 
   def update
-    @calendar.update_attributes(calendar_params)
+    @calendar.add_and_remove_days(params[:calendar][:calendar_workday_ids])
+
     respond_to do |format|
-      if @calendar.save
-        format.html { render :show }
+      if @calendar.update_attributes(calendar_params)
+        format.html { redirect_to [current_company, @calendar] }
         format.js
       else
         format.html { render :edit }
@@ -58,6 +60,6 @@ class CalendarsController < ApplicationController
   private
 
   def calendar_params
-    params.require(:calendar).permit(:name)
+    params.require(:calendar).permit(:name, :business_hours_start, :business_hours_end, :editable, :calendar_workday_ids)
   end
 end

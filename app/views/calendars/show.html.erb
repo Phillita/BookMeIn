@@ -1,1 +1,10 @@
-<div id='calendar'></div>
+<h1><%= @calendar.name %> <small class="header-edit"><%= link_to fa_icon('pencil'), edit_company_calendar_path(current_company, @calendar) if can? :update, @calendar %></small></h1>
+
+<hr>
+<%= tag :div, id: 'calendar',
+    data: {
+      dow: @calendar.workdays.collect { |day| day.id - 1 },
+      business_hours_start: @calendar.business_hours_start.to_time.to_formatted_s(:time),
+      business_hours_end: @calendar.business_hours_end.to_time.to_formatted_s(:time),
+      editable: @calendar.editable,
+      event_buffer_time: @calendar.event_buffer_time } %>

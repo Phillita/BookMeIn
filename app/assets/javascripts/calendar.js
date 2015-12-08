@@ -6,7 +6,7 @@ setupCalendar = function() {
 				right: 'month,agendaWeek,agendaDay'
 			},
 			// defaultDate: '2015-12-12',
-			editable: true,
+			editable: $('#calendar').data('editable'),
 			eventLimit: true, // allow "more" link when too many events
       eventOverlap: false,
       views: {
@@ -15,12 +15,12 @@ setupCalendar = function() {
           }
       },
       businessHours: {
-          start: '08:00', // a start time (10am in this example)
-          end: '17:00', // an end time (6pm in this example)
+          start: $('#calendar').data('businessHoursStart'),
+          end: $('#calendar').data('businessHoursEnd'),
 
           // days of week. an array of zero-based day of week integers (0=Sunday)
           // (Monday-Friday in this example)
-          dow: [ 1, 2, 3, 4, 5 ]
+          dow: $('#calendar').data('dow')
       },
 			events: [
 				{
