@@ -60,6 +60,13 @@ class CalendarsController < ApplicationController
   private
 
   def calendar_params
-    params.require(:calendar).permit(:name, :business_hours_start, :business_hours_end, :editable, :calendar_workday_ids)
+    params.require(:calendar).permit(:name,
+                                     :business_hours_start,
+                                     :business_hours_end,
+                                     :editable,
+                                     :calendar_workday_ids,
+                                     :validate_name,
+                                     :validate_phone,
+                                     :validate_comment)
   end
 end
