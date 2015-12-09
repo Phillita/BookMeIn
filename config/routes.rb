@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :calendars, except: :index
   end
 
+  match '/event/confirmation/:client_email_confirm_token' => 'events#confirm', as: 'confirm_event', via: 'get'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

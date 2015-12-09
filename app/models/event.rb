@@ -27,7 +27,7 @@ class Event < ActiveRecord::Base
   end
 
   def send_confirmation_email
-    # TODO: create the mailer
+    EventMailer.confirmation_email(self).deliver_later
   end
 
   def validate_name?
