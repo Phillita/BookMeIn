@@ -37,4 +37,10 @@ RSpec.describe Event, type: :model do
       end
     end
   end
+
+  describe 'create' do
+    it 'sends an email' do
+      expect { FactoryGirl.create(:event) }.to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+  end
 end
