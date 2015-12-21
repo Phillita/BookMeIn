@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   before_create :create_company, unless: :company_id
 
   belongs_to :company
+  has_many :calendars, through: :company
 
   validates :first_name, :last_name, presence: true, length: { maximum: 50 }
 

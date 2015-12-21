@@ -36,7 +36,7 @@ class CalendarsController < ApplicationController
   end
 
   def update
-    @calendar.add_and_remove_days(params[:calendar][:calendar_workday_ids])
+    @calendar.add_and_remove_days(params[:calendar][:workday_ids])
 
     respond_to do |format|
       if @calendar.update_attributes(calendar_params)
@@ -60,6 +60,13 @@ class CalendarsController < ApplicationController
   private
 
   def calendar_params
-    params.require(:calendar).permit(:name, :business_hours_start, :business_hours_end, :editable, :calendar_workday_ids)
+    params.require(:calendar).permit(:name,
+                                     :business_hours_start,
+                                     :business_hours_end,
+                                     :editable,
+                                     :calendar_workday_ids,
+                                     :validate_name,
+                                     :validate_phone,
+                                     :validate_comment)
   end
 end

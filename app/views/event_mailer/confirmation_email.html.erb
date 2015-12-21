@@ -1,0 +1,8 @@
+<h1>Hello, <%= @event.client_name if @event.client_name %></h1>
+<p>
+  You have successfully requested an appointment at <%= @event.start_dt.to_formatted_s %> and approximately ending at <%= @event.end_dt.to_formatted_s %>.
+</p>
+<p>
+  Please follow the <%= link_to 'link', confirm_event_url(@event.client_email_confirm_token) %> to confirm your appointment.
+</p>
+<p>Thanks for using BookMeIn!</p>

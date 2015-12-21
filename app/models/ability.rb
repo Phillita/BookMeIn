@@ -9,6 +9,9 @@ class Ability
 
     unless user.guest?
       can :manage, Calendar, company: user.company
+      can :manage, Event do |event|
+        user.calendars.include?(event.calendar)
+      end
     end
 
     # The first argument to `can` is the action you are giving the user
