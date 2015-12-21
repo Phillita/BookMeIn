@@ -1,0 +1,30 @@
+<%= simple_form_for [current_company, calendar, event], remote: true do |f| %>
+  <div class="modal-body">
+    <%= f.input :calendar_id, as: :hidden %>
+    <%= f.input :start_dt, as: :hidden %>
+    <%= f.input :end_dt, as: :hidden %>
+
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <%= f.input :client_name, label: 'Name' %>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <%= f.input :client_email, label: 'Email' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <%= f.input :client_phone, label: 'Phone', as: :tel %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <%= f.input :client_comment, label: 'Description', as: :text %>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <%= f.submit class: 'btn btn-success' %>
+  </div>
+<% end %>

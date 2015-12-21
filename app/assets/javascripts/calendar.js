@@ -1,7 +1,15 @@
 setupCalendar = function() {
+  var timeConstraint = {
+      start: $('#calendar').data('businessHoursStart'),
+      end: $('#calendar').data('businessHoursEnd'),
+
+      // days of week. an array of zero-based day of week integers (0=Sunday)
+      // (Monday-Friday in this example)
+      dow: $('#calendar').data('dow')
+  };
   $('#calendar').fullCalendar({
 			header: {
-				left: 'next today',
+				left: 'prev next today',
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
@@ -14,50 +22,34 @@ setupCalendar = function() {
               eventLimit: 6 // adjust to 6 only for agendaWeek/agendaDay
           }
       },
-      businessHours: {
-          start: $('#calendar').data('businessHoursStart'),
-          end: $('#calendar').data('businessHoursEnd'),
-
-          // days of week. an array of zero-based day of week integers (0=Sunday)
-          // (Monday-Friday in this example)
-          dow: $('#calendar').data('dow')
-      },
-			events: [
-				// {
-				// 	title: 'All Day Event',
-				// 	start: moment().format('YYYY-MM-DD'),
-        //   source: {}, // This is where the object from the db can go
-        //   description: 'CUSTOM' // Not standard, will not be displayed by default
-				// },
-				// {
-				// 	title: 'Long Event',
-				// 	start: '2015-12-07',
-				// 	end: '2015-12-10'
-				// },
-				// {
-				// 	id: 999,
-				// 	title: 'Repeating Event',
-				// 	start: '2015-12-09T16:00:00'
-				// },
-				// {
-				// 	id: 999,
-				// 	title: 'Repeating Event',
-				// 	start: '2015-12-16T16:00:00'
-				// },
-				// {
-				// 	title: 'Meeting',
-				// 	start: '2015-12-12T10:30:00',
-				// 	end: '2015-12-12T12:30:00'
-				// },
-				// {
-				// 	title: 'Click for Google',
-				// 	url: 'http://google.com/',
-				// 	start: '2015-12-28'
-				// }
-			],
+      businessHours: timeConstraint,
+			events: '/companies/' + $('#calendar').data('comid') + '/calendars/' + $('#calendar').data('calid') + '/events.json',
       eventRender: function(event, element) {
         if(event.description) {
           element.append('<p>' + event.description + '</p>');
+        }
+      },
+
+      selectable: true,
+      selectHelper: true,
+      selectOverlap: false,
+      unselectAuto: false,
+      selectConstraint: timeConstraint,
+      select: function(start, end, jsEvent, view) {
+        // example of duration validation
+        // var ms = moment(start,"DD/MM/YYYY HH:mm:ss").diff(moment(end,"DD/MM/YYYY HH:mm:ss"));
+        // var d = moment.duration(ms);
+        // var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
+
+        $('#event_start_dt').val(start.format());
+        $('#event_end_dt').val(end.format());
+        $('#eventModal').modal('show');
+      },
+      dayClick: function(date, jsEvent, view) {
+        if(view.name === 'month' || view.name === 'basicWeek' || view.name === 'basicDay') {
+          // change to day view
+          $('#calendar').fullCalendar('gotoDate', date);
+          $('#calendar').fullCalendar('changeView', 'agendaDay');
         }
       }
 		});

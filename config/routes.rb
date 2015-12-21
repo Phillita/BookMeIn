@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :companies, only: :edit do
-    resources :calendars, except: :index
+    resources :calendars, except: :index do
+      resources :events, only: %i(create index)
+    end
   end
 
   match '/event/confirmation/:client_email_confirm_token' => 'events#confirm', as: 'confirm_event', via: 'get'

@@ -12,6 +12,7 @@ class Event < ActiveRecord::Base
   validates :client_name, presence: true, if: :validate_name?
   validates :client_phone, presence: true, if: :validate_phone?
   validates :client_comment, presence: true, if: :validate_comment?
+  validate :validate_start_dt
 
   private
 
@@ -40,5 +41,9 @@ class Event < ActiveRecord::Base
 
   def validate_comment?
     try(:calendar).try(:validate_comment)
+  end
+
+  def validate_start_dt
+    errors.add(:base, 'Start Date must be greater than today.')
   end
 end

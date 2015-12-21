@@ -3,6 +3,11 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user) { FactoryGirl.build(:user) }
 
+  describe 'relationships' do
+    it { should belong_to(:company) }
+    it { should have_many(:calendars).through(:company) }
+  end
+
   describe 'validations' do
     it 'should be valid' do
       expect(user.valid?).to be_truthy
