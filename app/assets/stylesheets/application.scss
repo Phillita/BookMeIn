@@ -1,2 +1,7 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'fullcalendar/dist/fullcalendar';
+@import 'font-awesome';
+
+@import 'home';
+@import 'calendar';

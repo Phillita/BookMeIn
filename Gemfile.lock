@@ -51,6 +51,7 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bower-rails (0.10.0)
     builder (3.2.2)
     byebug (8.2.1)
     cancancan (1.13.1)
@@ -76,6 +77,8 @@ GEM
     execjs (2.6.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
+    font-awesome-rails (4.5.0.0)
+      railties (>= 3.2, < 5.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -198,12 +201,14 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   better_errors
   bootstrap-sass (~> 3.3.5)
+  bower-rails (~> 0.10.0)
   byebug
   cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)
   database_cleaner (~> 1.4.1)
   devise
   factory_girl
+  font-awesome-rails
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener

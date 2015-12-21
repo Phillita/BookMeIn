@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201014333) do
+ActiveRecord::Schema.define(version: 20151208162301) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token", limit: 255
@@ -20,18 +20,46 @@ ActiveRecord::Schema.define(version: 20151201014333) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "calendar_workdays", force: :cascade do |t|
+    t.integer  "calendar_id", limit: 4
+    t.integer  "workday_id",  limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
   create_table "calendars", force: :cascade do |t|
-    t.string   "name",               limit: 255
-    t.integer  "company_id",         limit: 4
+    t.string   "name",                 limit: 255
+    t.integer  "company_id",           limit: 4
     t.boolean  "event_verification"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.time     "business_hours_start"
+    t.time     "business_hours_end"
+    t.boolean  "editable"
+    t.integer  "event_buffer_time",    limit: 4
+    t.boolean  "validate_name",                    default: false
+    t.boolean  "validate_phone",                   default: false
+    t.boolean  "validate_comment",                 default: false
   end
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "calendar_id",                limit: 4
+    t.datetime "start_dt"
+    t.datetime "end_dt"
+    t.string   "client_name",                limit: 255
+    t.string   "client_email",               limit: 255
+    t.string   "client_phone",               limit: 255
+    t.text     "client_comment",             limit: 65535
+    t.boolean  "client_email_confirm",                     default: false
+    t.string   "client_email_confirm_token", limit: 255
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,5 +91,11 @@ ActiveRecord::Schema.define(version: 20151201014333) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
+
+  create_table "workdays", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
 end

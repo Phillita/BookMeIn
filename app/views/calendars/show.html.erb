@@ -1,1 +1,18 @@
-SHOW ALL THE CALENDAR THINGS
+<h1><%= @calendar.name %> <small class="header-edit"><%= link_to fa_icon('pencil'), edit_company_calendar_path(current_company, @calendar) if can? :update, @calendar %></small></h1>
+
+<hr>
+
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <%= tag :div, id: 'calendar',
+      data: {
+        calid: @calendar.id,
+        comid: @calendar.company_id,
+        dow: @calendar.workdays.collect { |day| day.id - 1 },
+        business_hours_start: @calendar.business_hours_start.to_datetime.to_formatted_s(:time),
+        business_hours_end: @calendar.business_hours_end.to_datetime.to_formatted_s(:time),
+        editable: @calendar.editable,
+        event_buffer_time: @calendar.event_buffer_time } %>
+  </div>
+</div>
+<%= render partial: 'events/event_modal', locals: { calendar: @calendar, event: Event.new(calendar: @calendar) } %>
