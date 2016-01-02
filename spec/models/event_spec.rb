@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Event, type: :model do
   describe 'relationships' do
     it { should belong_to :calendar }
+    it { should have_one(:company).through(:calendar) }
   end
 
   describe 'validations' do
@@ -34,6 +35,16 @@ RSpec.describe Event, type: :model do
       it 'should reject all invalid client_email addresses' do
         invalid_addresses = %w(user@example,com user_at_foo.org user.name@example. foo@bar_baz.com foo@bar+baz.com)
         invalid_addresses.each { |invalid_address| expect(subject).not_to allow_value(invalid_address).for(:client_email) }
+      end
+    end
+  end
+
+  describe 'scopes' do
+    describe 'confirmed' do
+      it 'should return only events that have been confirmed by the client' do
+        FactoryGirl.create(:confirmed_event)
+        FactoryGirl.create(:event)
+        expect(Event.confirmed.size).to eq(1)
       end
     end
   end

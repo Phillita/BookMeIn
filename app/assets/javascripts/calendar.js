@@ -25,9 +25,9 @@ setupCalendar = function() {
       businessHours: timeConstraint,
 			events: '/companies/' + $('#calendar').data('comid') + '/calendars/' + $('#calendar').data('calid') + '/events.json',
       eventRender: function(event, element) {
-        if(event.description) {
-          element.append('<p>' + event.description + '</p>');
-        }
+        // if(event.description) {
+        //   element.append('<p>' + event.description + '</p>');
+        // }
       },
 
       selectable: true,

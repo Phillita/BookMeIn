@@ -7,5 +7,12 @@ FactoryGirl.define do
     end_dt Time.zone.now + 3.hours
     client_phone '555-555-5555'
     client_comment 'Comment'
+    client_email_confirm false
+
+    trait :confirm do
+      client_email_confirm true
+    end
+
+    factory :confirmed_event, traits: %i(confirm)
   end
 end

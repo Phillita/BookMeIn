@@ -1,11 +1,12 @@
 class EventsController < ApplicationController
   load_and_authorize_resource :calendar
-  load_and_authorize_resource through: :calendar, except: :confirm
+  load_and_authorize_resource through: :calendar, except: %i(confirm index)
 
   def confirm
     event = Event.find_by(client_email_confirm_token: params[:client_email_confirm_token])
     return redirect_to :root if event.client_email_confirm
     event.update_attribute(:client_email_confirm, true)
+    EventMailer.icalendar_event_email(event).deliver_later
   end
 
   def create
@@ -22,7 +23,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = @calendar.events
+    @events = @calendar.events.confirmed
     respond_to do |format|
       format.html
       format.js

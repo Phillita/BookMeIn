@@ -1,0 +1,5 @@
+<h1>Hello, <%= @event.client_name if @event.client_name %></h1>
+<p>
+  You have successfully booked your appointment at <%= @event.start_dt.to_formatted_s %> and approximately ending at <%= @event.end_dt.to_formatted_s %>.
+</p>
+<p>Thanks for using BookMeIn!</p>

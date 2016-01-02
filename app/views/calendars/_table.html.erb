@@ -23,8 +23,10 @@
     </tbody>
     <tfoot>
       <tr>
-        <td>
-          <%= link_to 'Add a Calendar', new_company_calendar_path(current_company), class: 'btn btn-success' %>
+        <td colspan="3">
+          <%= link_to new_company_calendar_path(current_company), class: 'btn btn-success' do %>
+            <%= fa_icon('plus') %> Add a Calendar
+          <% end %>
         </td>
       </tr>
     </tfoot>

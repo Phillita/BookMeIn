@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   belongs_to :calendar
+  has_one :company, through: :calendar
 
   before_save :downcase_email, if: :client_email_changed?
   before_create :generate_client_email_confirm_token
@@ -13,6 +14,8 @@ class Event < ActiveRecord::Base
   validates :client_phone, presence: true, if: :validate_phone?
   validates :client_comment, presence: true, if: :validate_comment?
   validate :validate_start_dt
+
+  scope :confirmed, -> { where(client_email_confirm: true) }
 
   private
 
@@ -44,6 +47,7 @@ class Event < ActiveRecord::Base
   end
 
   def validate_start_dt
-    errors.add(:base, 'Start Date must be greater than today.')
+    errors.add(:base, 'Start Date must be greater than today.') if start_dt && start_dt < Time.zone.now
+    errors.add(:base, 'Start Date must be less than the end date.') if start_dt && end_dt && end_dt < start_dt
   end
 end
