@@ -1,0 +1,16 @@
+{
+  "name": "BookMeIn",
+  "description": "A great calendar app",
+  "version": "1.0.0",
+  "engines": {
+    "node": "5.1.0",
+    "npm": "3.3.12"
+  },
+  "dependencies": {
+    "bower": "0.6.x"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "postinstall": "bower install"
+  }
+}

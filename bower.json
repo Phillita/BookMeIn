@@ -1,7 +1,0 @@
-{
-  "name": "dsl-generated dependencies",
-  "dependencies": {
-    "bower": "0.6.x",
-    "fullcalendar": "latest"
-  }
-}
